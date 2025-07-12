@@ -67,7 +67,7 @@ export class FeedbackComponent implements OnInit {
 
   formatDate(dateString: string): string {
     const date = new Date(dateString);
-    return date.toLocaleDateString(this.currentLanguage === 'ar' ? 'ar-SA' : 'en-US', {
+    return date.toLocaleDateString(this.currentLanguage === 'ar' ? 'ar' : 'en', {
       year: 'numeric',
       month: 'short',
       day: 'numeric'
