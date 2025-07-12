@@ -1,0 +1,137 @@
+<div class="statistics-container">
+  <!-- Header Section -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <span class="logo-icon">📊</span>
+          <h1 class="logo-text">{{ 'statistics.title' | translate }}</h1>
+        </div>
+        <div class="language-switcher">
+          <button class="btn btn-secondary language-btn" (click)="switchLanguage()">
+            <span class="language-icon">🌐</span>
+            {{ languageService.currentLang === 'ar' ? 'English' : 'العربية' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Loading State -->
+      <div class="loading-container" *ngIf="isLoading">
+        <div class="loading-spinner">
+          <div class="spinner"></div>
+          <p>{{ 'statistics.loading' | translate }}</p>
+        </div>
+      </div>
+
+      <!-- Statistics Content -->
+      <div class="statistics-content" *ngIf="!isLoading">
+        <!-- Summary Cards -->
+        <section class="summary-section">
+          <h2 class="section-title">{{ 'statistics.summary' | translate }}</h2>
+          <div class="summary-cards">
+            <div class="summary-card">
+              <div class="card-icon">📈</div>
+              <div class="card-content">
+                <h3>{{ 'statistics.totalTypes' | translate }}</h3>
+                <p class="card-value">{{ totalTypes }}</p>
+              </div>
+            </div>
+            <div class="summary-card">
+              <div class="card-icon">💬</div>
+              <div class="card-content">
+                <h3>{{ 'statistics.totalFeedbacks' | translate }}</h3>
+                <p class="card-value">{{ totalFeedbacks }}</p>
+              </div>
+            </div>
+            <div class="summary-card">
+              <div class="card-icon">⭐</div>
+              <div class="card-content">
+                <h3>{{ 'statistics.averageRating' | translate }}</h3>
+                <p class="card-value">{{ averageRating }}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-section">
+          <h2 class="section-title">{{ 'statistics.charts' | translate }}</h2>
+          <div class="charts-container">
+            <div class="chart-card">
+              <h3>{{ 'statistics.ratingsChart' | translate }}</h3>
+              <div class="chart-container">
+                <canvas #ratingsChart></canvas>
+              </div>
+            </div>
+            <div class="chart-card">
+              <h3>{{ 'statistics.feedbacksChart' | translate }}</h3>
+              <div class="chart-container">
+                <canvas #feedbacksChart></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Statistics Table -->
+        <section class="table-section">
+          <h2 class="section-title">{{ 'statistics.details' | translate }}</h2>
+          <div class="table-container">
+            <table class="statistics-table">
+              <thead>
+                <tr>
+                  <th>{{ 'statistics.name' | translate }}</th>
+                  <th>{{ 'statistics.period' | translate }}</th>
+                  <th>{{ 'statistics.status' | translate }}</th>
+                  <th>{{ 'statistics.totalFeedbacks' | translate }}</th>
+                  <th>{{ 'statistics.averageRating' | translate }}</th>
+                  <th>{{ 'statistics.rating' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let stat of statistics" class="table-row">
+                  <td class="name-cell">
+                    <div class="feedback-name">
+                      <span class="name-en">{{ stat.nameEn }}</span>
+                    </div>
+                  </td>
+                  <td class="period-cell">
+                    <div class="date-range">
+                      <span class="start-date">{{ formatDate(stat.startDate) }}</span>
+                      <span class="end-date">{{ formatDate(stat.endDate) }}</span>
+                    </div>
+                  </td>
+                  <td class="status-cell">
+                    <span class="status-badge" [class]="getStatusClass(stat.startDate, stat.endDate)">
+                      {{ getStatusText(stat.startDate, stat.endDate) }}
+                    </span>
+                  </td>
+                  <td class="feedbacks-cell">
+                    <span class="feedbacks-count">{{ stat.totalFeedbacks }}</span>
+                  </td>
+                  <td class="rating-cell">
+                    <span class="average-rating">{{ stat.averageRating.toFixed(1) }}</span>
+                  </td>
+                  <td class="stars-cell">
+                    <span class="stars-display">{{ getAverageRatingStars(stat.averageRating) }}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="!isLoading && statistics.length === 0">
+          <div class="empty-icon">📊</div>
+          <h3>{{ 'statistics.noData' | translate }}</h3>
+          <p>{{ 'statistics.noDataDescription' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

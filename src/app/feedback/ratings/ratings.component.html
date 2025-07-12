@@ -1,0 +1,94 @@
+<div class="ratings-container">
+  <!-- Shared Navbar -->
+  <app-navbar></app-navbar>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-header">
+      <button class="btn btn-secondary back-btn" (click)="onBack()">
+        <span class="btn-icon">←</span>
+        {{ 'ratings.back' | translate }}
+      </button>
+      <h1 class="page-title">{{ 'ratings.title' | translate }}</h1>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-container" *ngIf="isLoading">
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>{{ 'ratings.loading' | translate }}</p>
+      </div>
+    </div>
+
+    <!-- Ratings Content -->
+    <div class="ratings-content" *ngIf="!isLoading">
+      <!-- Summary Card -->
+      <div class="summary-card">
+        <div class="summary-item">
+          <div class="summary-icon">📊</div>
+          <div class="summary-info">
+            <h3>{{ 'ratings.totalRatings' | translate }}</h3>
+            <div class="count-display">{{ getTotalRatings() }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ratings Table -->
+      <div class="ratings-table-container" *ngIf="ratings.length > 0">
+        <h2 class="table-title">{{ 'ratings.feedbackList' | translate }}</h2>
+        <div class="table-responsive">
+          <table class="ratings-table">
+            <thead>
+              <tr>
+                <th>{{ 'ratings.fullName' | translate }}</th>
+                <th>{{ 'ratings.email' | translate }}</th>
+                <th>{{ 'ratings.rating' | translate }}</th>
+                <th>{{ 'ratings.comment' | translate }}</th>
+                <th>{{ 'ratings.date' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let rating of ratings" class="rating-row">
+                <td class="name-cell">
+                  <div class="user-info">
+                    <span class="user-name">{{ rating.fullName }}</span>
+                  </div>
+                </td>
+                <td class="email-cell">
+                  <a href="mailto:{{ rating.email }}" class="email-link">{{ rating.email }}</a>
+                </td>
+                <td class="rating-cell">
+                  <div class="stars-container">
+                    <span class="star filled" *ngFor="let star of getStarsArray(rating.stars)">★</span>
+                    <span class="star empty" *ngFor="let star of getEmptyStarsArray(rating.stars)">☆</span>
+                    <span class="rating-text">({{ rating.stars }}/5)</span>
+                  </div>
+                </td>
+                <td class="comment-cell">
+                  <div class="comment-content" *ngIf="rating.comment; else noComment">
+                    {{ rating.comment }}
+                  </div>
+                  <ng-template #noComment>
+                    <span class="no-comment">{{ 'ratings.noComment' | translate }}</span>
+                  </ng-template>
+                </td>
+                <td class="date-cell">
+                  <div class="date-info">
+                    <div class="date-text">{{ formatDate(rating.createdDate) }}</div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="!isLoading && ratings.length === 0">
+        <div class="empty-icon">⭐</div>
+        <h3>{{ 'ratings.noRatings' | translate }}</h3>
+        <p>{{ 'ratings.noRatingsDescription' | translate }}</p>
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,40 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <span class="brand-icon">📊</span>
+    <h1>{{ 'navbar.title' | translate }}</h1>
+  </div>
+
+  <div class="navbar-actions">
+    <div class="nav-links">
+      <button class="btn btn-secondary nav-btn" (click)="navigateToDashboard()">
+        <span class="nav-icon">🏠</span>
+        {{ 'navbar.dashboard' | translate }}
+      </button>
+      <button class="btn btn-secondary nav-btn" (click)="navigateToFeedback()">
+        <span class="nav-icon">📝</span>
+        {{ 'navbar.feedback' | translate }}
+      </button>
+      <button class="btn btn-secondary nav-btn" (click)="navigateToStatistics()">
+        <span class="nav-icon">📊</span>
+        {{ 'navbar.statistics' | translate }}
+      </button>
+    </div>
+
+    <div class="language-switcher">
+      <button class="btn btn-secondary language-btn" (click)="switchLanguage()">
+        <span class="language-icon">🌐</span>
+        {{ languageService.currentLang === 'ar' ? 'English' : 'العربية' }}
+      </button>
+    </div>
+
+    <div class="user-info">
+      <span class="user-icon">👤</span>
+      <span class="username">{{ username }}</span>
+    </div>
+
+    <button class="btn btn-danger logout-btn" (click)="logout()">
+      <span class="logout-icon">🚪</span>
+      {{ 'navbar.logout' | translate }}
+    </button>
+  </div>
+</nav>

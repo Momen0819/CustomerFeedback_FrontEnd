@@ -1,0 +1,105 @@
+<div class="feedback-system">
+  <!-- Header Section -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-section">
+          <div class="logo">
+            <span class="logo-icon">💬</span>
+            <h1 class="logo-text">{{ 'home.title' | translate }}</h1>
+          </div>
+        </div>
+        <div class="language-switcher">
+          <button class="btn btn-secondary language-btn" (click)="switchLanguage()">
+            <span class="language-icon">🌐</span>
+            {{ languageService.currentLang === 'ar' ? 'English' : 'العربية' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Hero Section -->
+      <section class="hero-section fade-in">
+        <div class="hero-content">
+          <h2 class="hero-title">{{ 'home.description' | translate }}</h2>
+          <p class="hero-subtitle">
+            {{ 'home.subtitle' | translate }}
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary hero-btn" (click)="navigateToLogin()">
+              {{ 'home.login' | translate }}
+            </button>
+            <button class="btn btn-secondary hero-btn" (click)="navigateToRegister()">
+              {{ 'home.register' | translate }}
+            </button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="feedback-cards">
+            <div class="feedback-card card-1">
+              <div class="card-icon">⭐</div>
+              <div class="card-content">
+                <h4>{{ 'home.excellent' | translate }}</h4>
+                <p>{{ 'home.excellentDesc' | translate }}</p>
+              </div>
+            </div>
+            <div class="feedback-card card-2">
+              <div class="card-icon">👍</div>
+              <div class="card-content">
+                <h4>{{ 'home.good' | translate }}</h4>
+                <p>{{ 'home.goodDesc' | translate }}</p>
+              </div>
+            </div>
+            <div class="feedback-card card-3">
+              <div class="card-icon">💡</div>
+              <div class="card-content">
+                <h4>{{ 'home.suggestion' | translate }}</h4>
+                <p>{{ 'home.suggestionDesc' | translate }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="features-section">
+        <h3 class="section-title slide-in-left">
+          {{ 'home.keyFeatures' | translate }}
+        </h3>
+        <div class="features-grid">
+          <div class="feature-card card slide-in-left">
+            <div class="feature-icon">📊</div>
+            <h4>{{ 'home.advancedAnalytics' | translate }}</h4>
+            <p>{{ 'home.advancedAnalyticsDesc' | translate }}</p>
+          </div>
+          <div class="feature-card card slide-in-left">
+            <div class="feature-icon">🎯</div>
+            <h4>{{ 'home.preciseTargeting' | translate }}</h4>
+            <p>{{ 'home.preciseTargetingDesc' | translate }}</p>
+          </div>
+          <div class="feature-card card slide-in-left">
+            <div class="feature-icon">⚡</div>
+            <h4>{{ 'home.quickResponse' | translate }}</h4>
+            <p>{{ 'home.quickResponseDesc' | translate }}</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-text">
+          {{ 'home.footerText' | translate }}
+        </p>
+      </div>
+    </div>
+  </footer>
+</div>

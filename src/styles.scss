@@ -1,0 +1,307 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Color Palette */
+  --primary-color: #6366f1;
+  --primary-light: #818cf8;
+  --primary-dark: #4f46e5;
+  --secondary-color: #f59e0b;
+  --accent-color: #10b981;
+  --success-color: #22c55e;
+  --warning-color: #f97316;
+  --error-color: #ef4444;
+
+  /* Neutral Colors */
+  --white: #ffffff;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: var(--gradient-primary);
+  color: var(--gray-800);
+  line-height: 1.6;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* RTL/LTR Direction Support */
+[dir="rtl"] {
+  text-align: right;
+
+  .container {
+    direction: rtl;
+  }
+
+  .btn {
+    direction: rtl;
+  }
+
+  .card {
+    direction: rtl;
+  }
+
+  .feedback-textarea {
+    direction: rtl;
+    text-align: right;
+  }
+
+  .hero-content {
+    text-align: right;
+  }
+
+  .feature-card {
+    text-align: center;
+  }
+
+  .feedback-form {
+    text-align: center;
+  }
+
+  .rating-stars {
+    flex-direction: row-reverse;
+  }
+
+  .feedback-card {
+    flex-direction: row-reverse;
+  }
+
+  .card-content {
+    text-align: right;
+  }
+
+  .footer-content {
+    text-align: center;
+  }
+
+  .header-content {
+    flex-direction: row-reverse;
+  }
+
+  .logo {
+    flex-direction: row-reverse;
+  }
+
+  .hero-actions {
+    flex-direction: row-reverse;
+  }
+}
+
+[dir="ltr"] {
+  text-align: left;
+
+  .container {
+    direction: ltr;
+  }
+
+  .btn {
+    direction: ltr;
+  }
+
+  .card {
+    direction: ltr;
+  }
+
+  .feedback-textarea {
+    direction: ltr;
+    text-align: left;
+  }
+
+  .hero-content {
+    text-align: left;
+  }
+
+  .feature-card {
+    text-align: center;
+  }
+
+  .feedback-form {
+    text-align: center;
+  }
+
+  .rating-stars {
+    flex-direction: row;
+  }
+
+  .feedback-card {
+    flex-direction: row;
+  }
+
+  .card-content {
+    text-align: left;
+  }
+
+  .footer-content {
+    text-align: center;
+  }
+
+  .header-content {
+    flex-direction: row;
+  }
+
+  .logo {
+    flex-direction: row;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+  }
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.btn-primary {
+  background: var(--gradient-secondary);
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background: var(--white);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-xl);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .card {
+    padding: var(--spacing-lg);
+  }
+}

@@ -1,0 +1,94 @@
+<div class="feedback-container">
+  <!-- Shared Navbar -->
+  <app-navbar></app-navbar>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-header">
+      <div class="header-row">
+        <div>
+          <h1 class="page-title">{{ 'feedback.title' | translate }}</h1>
+          <p class="page-description">{{ 'feedback.description' | translate }}</p>
+        </div>
+        <button class="btn btn-success add-feedback-btn" (click)="onAddFeedback()">
+          <span class="btn-icon">➕</span>
+          {{ 'feedback.addNew' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-container" *ngIf="isLoading">
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>{{ 'feedback.loading' | translate }}</p>
+      </div>
+    </div>
+
+    <!-- Feedback Types Grid -->
+    <div class="feedback-grid" *ngIf="!isLoading && feedbackTypes.length > 0">
+      <div class="feedback-card" *ngFor="let feedbackType of feedbackTypes">
+        <div class="card-header">
+          <div class="card-icon">📝</div>
+          <div class="status-badge" [class]="getStatusClass(feedbackType.startDate, feedbackType.endDate)">
+            {{ getStatusText(feedbackType.startDate, feedbackType.endDate) }}
+          </div>
+        </div>
+
+        <div class="card-content">
+          <h3 class="feedback-name">{{ feedbackType.name }}</h3>
+
+          <div class="date-range">
+            <div class="date-item">
+              <span class="date-label">{{ 'feedback.startDate' | translate }}:</span>
+              <span class="date-value">{{ formatDate(feedbackType.startDate) }}</span>
+            </div>
+            <div class="date-item">
+              <span class="date-label">{{ 'feedback.endDate' | translate }}:</span>
+              <span class="date-value">{{ formatDate(feedbackType.endDate) }}</span>
+            </div>
+          </div>
+        </div>
+
+                <div class="card-actions">
+          <div class="action-buttons">
+
+
+            <button class="btn btn-warning action-btn"
+                    (click)="onEdit(feedbackType)">
+              <span class="btn-icon">✏️</span>
+              {{ 'feedback.edit' | translate }}
+            </button>
+
+                        <button class="btn btn-info action-btn ratings-btn"
+                        [disabled]="!isActive(feedbackType.startDate, feedbackType.endDate)"
+                    (click)="onViewRatings(feedbackType)">
+              <span class="btn-icon">⭐</span>
+              <span class="btn-text">{{ 'feedback.viewRatings' | translate }}</span>
+            </button>
+
+            <button class="btn btn-success action-btn copy-link-btn"
+                    [disabled]="!isActive(feedbackType.startDate, feedbackType.endDate)"
+                    (click)="onCopyLink(feedbackType)">
+              <span class="btn-icon">🔗</span>
+              <span class="btn-text">{{ 'feedback.copyLink' | translate }}</span>
+            </button>
+
+            <button class="btn btn-danger action-btn"
+                    (click)="onDelete(feedbackType)">
+              <span class="btn-icon">🗑️</span>
+              {{ 'feedback.delete' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="!isLoading && feedbackTypes.length === 0">
+      <div class="empty-icon">📝</div>
+      <h3>{{ 'feedback.noData' | translate }}</h3>
+      <p>{{ 'feedback.noDataDescription' | translate }}</p>
+    </div>
+  </main>
+</div>

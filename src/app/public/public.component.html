@@ -1,0 +1,163 @@
+<div class="public-container">
+  <!-- Header Section -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-section">
+          <div class="logo">
+            <span class="logo-icon">💬</span>
+            <h1 class="logo-text">{{ 'public.title' | translate }}</h1>
+          </div>
+        </div>
+        <div class="language-switcher">
+          <button class="btn btn-secondary language-btn" (click)="switchLanguage()">
+            <span class="language-icon">🌐</span>
+            {{ languageService.currentLang === 'ar' ? 'English' : 'العربية' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-header">
+      <h1 class="page-title">{{ 'public.title' | translate }}</h1>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-container" *ngIf="isLoading">
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>{{ 'public.loading' | translate }}</p>
+      </div>
+    </div>
+
+    <!-- Feedback Form -->
+    <div class="feedback-form-container" *ngIf="!isLoading && feedbackType">
+      <div class="form-header">
+        <div class="feedback-type-info">
+          <h2 class="feedback-title">{{ feedbackType.nameEn }}</h2>
+          <div class="status-badge" [class]="getStatusClass(feedbackType.startDate, feedbackType.endDate)">
+            {{ getStatusText(feedbackType.startDate, feedbackType.endDate) }}
+          </div>
+        </div>
+        <div class="date-info">
+          <p>{{ 'public.availableUntil' | translate }}: {{ formatDate(feedbackType.endDate) }}</p>
+        </div>
+      </div>
+
+            <div class="form-content">
+        <p class="form-description">{{ 'public.description' | translate }}</p>
+
+        <!-- Feedback Form -->
+        <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" class="feedback-form" *ngIf="isActive(feedbackType.startDate, feedbackType.endDate) && !hasSubmitted">
+          <div class="form-section">
+            <h3 class="section-title">{{ 'public.personalInfo' | translate }}</h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fullName" class="form-label">{{ 'public.fullName' | translate }}</label>
+                <input
+                  type="text"
+                  id="fullName"
+                  formControlName="fullName"
+                  [placeholder]="'public.fullNamePlaceholder' | translate"
+                  class="form-input"
+                  [class.error]="feedbackForm.get('fullName')?.invalid && feedbackForm.get('fullName')?.touched"
+                >
+                <div class="error-message" *ngIf="getFieldError('fullName')">
+                  {{ getFieldError('fullName') }}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">{{ 'public.email' | translate }}</label>
+                <input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  [placeholder]="'public.emailPlaceholder' | translate"
+                  class="form-input"
+                  [class.error]="feedbackForm.get('email')?.invalid && feedbackForm.get('email')?.touched"
+                >
+                <div class="error-message" *ngIf="getFieldError('email')">
+                  {{ getFieldError('email') }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="section-title">{{ 'public.rating' | translate }}</h3>
+
+            <div class="rating-container">
+              <div class="stars-display">
+                <span
+                  *ngFor="let star of getStarsArray()"
+                  class="star"
+                  [class.filled]="star <= feedbackForm.get('stars')?.value"
+                  [class.selected]="star === feedbackForm.get('stars')?.value"
+                  (click)="selectRating(star)"
+                >
+                  {{ star <= feedbackForm.get('stars')?.value ? '★' : '☆' }}
+                </span>
+              </div>
+              <div class="rating-text">
+                {{ feedbackForm.get('stars')?.value || 0 }}/5 {{ 'public.stars' | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="section-title">{{ 'public.comment' | translate }}</h3>
+
+            <div class="form-group">
+              <label for="comment" class="form-label">{{ 'public.commentLabel' | translate }}</label>
+              <textarea
+                id="comment"
+                formControlName="comment"
+                [placeholder]="'public.commentPlaceholder' | translate"
+                class="form-textarea"
+                rows="4"
+                [class.error]="feedbackForm.get('comment')?.invalid && feedbackForm.get('comment')?.touched"
+              ></textarea>
+              <div class="error-message" *ngIf="getFieldError('comment')">
+                {{ getFieldError('comment') }}
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary submit-btn" [disabled]="isSubmitting || feedbackForm.invalid">
+              <span class="btn-icon" *ngIf="!isSubmitting">📝</span>
+              <div class="spinner-small" *ngIf="isSubmitting"></div>
+              {{ isSubmitting ? ('public.submitting' | translate) : ('public.submit' | translate) }}
+            </button>
+          </div>
+        </form>
+
+        <!-- Already Submitted State -->
+        <div class="already-submitted-state" *ngIf="hasSubmitted">
+          <div class="submitted-icon">✅</div>
+          <h3>{{ 'public.alreadySubmitted' | translate }}</h3>
+          <p>{{ 'public.alreadySubmittedDescription' | translate }}</p>
+        </div>
+
+        <!-- Inactive State -->
+        <div class="inactive-state" *ngIf="!isActive(feedbackType.startDate, feedbackType.endDate)">
+          <div class="inactive-icon">⏰</div>
+          <h3>{{ 'public.inactive' | translate }}</h3>
+          <p>{{ 'public.inactiveDescription' | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error State -->
+    <div class="error-state" *ngIf="!isLoading && !feedbackType">
+      <div class="error-icon">❌</div>
+      <h3>{{ 'public.error' | translate }}</h3>
+      <p>{{ 'public.errorMessage' | translate }}</p>
+    </div>
+  </main>
+</div>

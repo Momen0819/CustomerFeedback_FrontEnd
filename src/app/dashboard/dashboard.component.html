@@ -1,0 +1,27 @@
+<div class="dashboard-container">
+  <!-- Shared Navbar -->
+  <app-navbar></app-navbar>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+      <div class="welcome-card">
+        <div class="welcome-icon">🎉</div>
+        <h2>{{ 'dashboard.welcome' | translate }}</h2>
+        <p>{{ 'dashboard.welcomeMessage' | translate }}</p>
+
+        <div class="welcome-actions">
+          <button class="btn btn-primary welcome-btn" (click)="navigateToFeedback()">
+            <span class="btn-icon">📝</span>
+            {{ 'dashboard.manageFeedbacks' | translate }}
+          </button>
+          <button class="btn btn-secondary welcome-btn" (click)="navigateToStatistics()">
+            <span class="btn-icon">📊</span>
+            {{ 'dashboard.showStatistics' | translate }}
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

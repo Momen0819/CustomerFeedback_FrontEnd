@@ -1,0 +1,205 @@
+.login-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-primary);
+}
+
+.login-card {
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.7s;
+  position: relative;
+}
+
+.language-switcher {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+}
+
+.language-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  backdrop-filter: blur(10px);
+  font-size: 0.875rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.language-btn:hover {
+  background: var(--primary-color);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+.language-icon {
+  font-size: 1rem;
+}
+
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  margin-top: var(--spacing-lg);
+}
+
+.login-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--primary-color);
+}
+
+.login-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin: 0;
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+label {
+  font-weight: 500;
+  color: var(--gray-700);
+  margin-bottom: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.input-icon {
+  font-size: 1.1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  margin-bottom: var(--spacing-xs);
+  transition: border-color 0.3s;
+  background: var(--gray-50);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+input[type="text"].error,
+input[type="email"].error,
+input[type="password"].error {
+  border-color: var(--error-color);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+input[type="text"].error:focus,
+input[type="email"].error:focus,
+input[type="password"].error:focus {
+  border-color: var(--error-color);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 500;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.login-btn {
+  width: 100%;
+  padding: var(--spacing-md);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: var(--spacing-md);
+  transition: all 0.3s ease;
+}
+
+.login-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.login-btn:disabled:hover {
+  transform: none;
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 500px) {
+  .login-card {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+  .login-header h2 {
+    font-size: 1.3rem;
+  }
+  .language-switcher {
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+  }
+}
+
+/* RTL/LTR support */
+[dir="rtl"] .login-card {
+  direction: rtl;
+}
+[dir="rtl"] .login-form label {
+  justify-content: flex-end;
+}
+[dir="rtl"] input[type="text"],
+[dir="rtl"] input[type="email"],
+[dir="rtl"] input[type="password"] {
+  text-align: right;
+}
+[dir="rtl"] .language-switcher {
+  right: auto;
+  left: var(--spacing-md);
+}
+[dir="rtl"] .error-message {
+  text-align: right;
+}
+
+[dir="ltr"] .login-card {
+  direction: ltr;
+}
+[dir="ltr"] .login-form label {
+  justify-content: flex-start;
+}
+[dir="ltr"] input[type="text"],
+[dir="ltr"] input[type="email"],
+[dir="ltr"] input[type="password"] {
+  text-align: left;
+}
+[dir="ltr"] .language-switcher {
+  left: auto;
+  right: var(--spacing-md);
+}
+[dir="ltr"] .error-message {
+  text-align: left;
+}

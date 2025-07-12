@@ -1,0 +1,149 @@
+<div class="create-feedback-container">
+  <!-- Shared Navbar -->
+  <app-navbar></app-navbar>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-header">
+      <h1 class="page-title">{{ 'create.title' | translate }}</h1>
+      <p class="page-description">{{ 'create.description' | translate }}</p>
+    </div>
+
+    <!-- Create Form -->
+    <div class="form-container">
+      <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="create-form">
+
+        <!-- Names Section -->
+        <div class="form-section">
+          <h3 class="section-title">{{ 'create.namesSection' | translate }}</h3>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nameEn">
+                {{ 'create.nameEn' | translate }}
+              </label>
+              <input
+                id="nameEn"
+                type="text"
+                formControlName="nameEn"
+                placeholder="{{ 'create.nameEnPlaceholder' | translate }}"
+                [class.error]="createForm.get('nameEn')?.invalid && createForm.get('nameEn')?.touched"
+              />
+              <div class="error-message" *ngIf="getErrorMessage('nameEn')">
+                {{ getErrorMessage('nameEn') }}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="nameAr">
+                {{ 'create.nameAr' | translate }}
+              </label>
+              <input
+                id="nameAr"
+                type="text"
+                formControlName="nameAr"
+                placeholder="{{ 'create.nameArPlaceholder' | translate }}"
+                [class.error]="createForm.get('nameAr')?.invalid && createForm.get('nameAr')?.touched"
+              />
+              <div class="error-message" *ngIf="getErrorMessage('nameAr')">
+                {{ getErrorMessage('nameAr') }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Descriptions Section -->
+        <div class="form-section">
+          <h3 class="section-title">{{ 'create.descriptionsSection' | translate }}</h3>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="descriptionEn">
+                {{ 'create.descriptionEn' | translate }}
+              </label>
+              <textarea
+                id="descriptionEn"
+                formControlName="descriptionEn"
+                placeholder="{{ 'create.descriptionEnPlaceholder' | translate }}"
+                rows="3"
+                [class.error]="createForm.get('descriptionEn')?.invalid && createForm.get('descriptionEn')?.touched"
+              ></textarea>
+              <div class="error-message" *ngIf="getErrorMessage('descriptionEn')">
+                {{ getErrorMessage('descriptionEn') }}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="descriptionAr">
+                {{ 'create.descriptionAr' | translate }}
+              </label>
+              <textarea
+                id="descriptionAr"
+                formControlName="descriptionAr"
+                placeholder="{{ 'create.descriptionArPlaceholder' | translate }}"
+                rows="3"
+                [class.error]="createForm.get('descriptionAr')?.invalid && createForm.get('descriptionAr')?.touched"
+              ></textarea>
+              <div class="error-message" *ngIf="getErrorMessage('descriptionAr')">
+                {{ getErrorMessage('descriptionAr') }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dates Section -->
+        <div class="form-section">
+          <h3 class="section-title">{{ 'create.datesSection' | translate }}</h3>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="startDate">
+                <span class="input-icon">📅</span>
+                {{ 'create.startDate' | translate }}
+              </label>
+              <input
+                id="startDate"
+                type="date"
+                formControlName="startDate"
+                [class.error]="createForm.get('startDate')?.invalid && createForm.get('startDate')?.touched"
+              />
+              <div class="error-message" *ngIf="getErrorMessage('startDate')">
+                {{ getErrorMessage('startDate') }}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="endDate">
+                <span class="input-icon">📅</span>
+                {{ 'create.endDate' | translate }}
+              </label>
+              <input
+                id="endDate"
+                type="date"
+                formControlName="endDate"
+                [class.error]="createForm.get('endDate')?.invalid && createForm.get('endDate')?.touched"
+              />
+              <div class="error-message" *ngIf="getErrorMessage('endDate')">
+                {{ getErrorMessage('endDate') }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary cancel-btn" (click)="onCancel()">
+            <span class="btn-icon">❌</span>
+            {{ 'create.cancel' | translate }}
+          </button>
+          <button type="submit" class="btn btn-success submit-btn" [disabled]="isLoading || createForm.invalid">
+            <span *ngIf="!isLoading" class="btn-icon">✅</span>
+            <span *ngIf="isLoading" class="loading-spinner"></span>
+            <span *ngIf="!isLoading">{{ 'create.submit' | translate }}</span>
+            <span *ngIf="isLoading">{{ 'create.submitting' | translate }}</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+</div>

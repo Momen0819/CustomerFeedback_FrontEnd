@@ -1,0 +1,141 @@
+<div class="edit-container">
+  <!-- Shared Navbar -->
+  <app-navbar></app-navbar>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-header">
+      <button class="btn btn-secondary back-btn" (click)="onCancel()">
+        <span class="btn-icon">←</span>
+        {{ 'edit.back' | translate }}
+      </button>
+      <h1 class="page-title">{{ 'edit.title' | translate }}</h1>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-container" *ngIf="isLoading">
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>{{ 'edit.loading' | translate }}</p>
+      </div>
+    </div>
+
+    <!-- Edit Form -->
+    <div class="edit-card" *ngIf="!isLoading">
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="edit-form">
+        <!-- Names Section -->
+        <div class="form-section">
+          <h3 class="section-title">{{ 'edit.namesSection' | translate }}</h3>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nameEn" class="form-label">{{ 'edit.nameEn' | translate }}</label>
+              <input
+                type="text"
+                id="nameEn"
+                formControlName="nameEn"
+                [placeholder]="'edit.nameEnPlaceholder' | translate"
+                class="form-input"
+                [class.error]="editForm.get('nameEn')?.invalid && editForm.get('nameEn')?.touched"
+              >
+              <div class="error-message" *ngIf="getFieldError('nameEn')">
+                {{ getFieldError('nameEn') }}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="nameAr" class="form-label">{{ 'edit.nameAr' | translate }}</label>
+              <input
+                type="text"
+                id="nameAr"
+                formControlName="nameAr"
+                [placeholder]="'edit.nameArPlaceholder' | translate"
+                class="form-input"
+                [class.error]="editForm.get('nameAr')?.invalid && editForm.get('nameAr')?.touched"
+              >
+              <div class="error-message" *ngIf="getFieldError('nameAr')">
+                {{ getFieldError('nameAr') }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Descriptions Section -->
+        <div class="form-section">
+          <h3 class="section-title">{{ 'edit.descriptionsSection' | translate }}</h3>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="descriptionEn" class="form-label">{{ 'edit.descriptionEn' | translate }}</label>
+              <textarea
+                id="descriptionEn"
+                formControlName="descriptionEn"
+                [placeholder]="'edit.descriptionEnPlaceholder' | translate"
+                class="form-textarea"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="descriptionAr" class="form-label">{{ 'edit.descriptionAr' | translate }}</label>
+              <textarea
+                id="descriptionAr"
+                formControlName="descriptionAr"
+                [placeholder]="'edit.descriptionArPlaceholder' | translate"
+                class="form-textarea"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Date Range Section -->
+        <div class="form-section">
+          <h3 class="section-title">{{ 'edit.datesSection' | translate }}</h3>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="startDate" class="form-label">{{ 'edit.startDate' | translate }}</label>
+              <input
+                type="date"
+                id="startDate"
+                formControlName="startDate"
+                class="form-input"
+                [class.error]="editForm.get('startDate')?.invalid && editForm.get('startDate')?.touched"
+              >
+              <div class="error-message" *ngIf="getFieldError('startDate')">
+                {{ getFieldError('startDate') }}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="endDate" class="form-label">{{ 'edit.endDate' | translate }}</label>
+              <input
+                type="date"
+                id="endDate"
+                formControlName="endDate"
+                class="form-input"
+                [class.error]="editForm.get('endDate')?.invalid && editForm.get('endDate')?.touched"
+              >
+              <div class="error-message" *ngIf="getFieldError('endDate')">
+                {{ getFieldError('endDate') }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary cancel-btn" (click)="onCancel()">
+            {{ 'edit.cancel' | translate }}
+          </button>
+          <button type="submit" class="btn btn-primary submit-btn" [disabled]="isSubmitting || editForm.invalid">
+            <span class="btn-icon" *ngIf="!isSubmitting">💾</span>
+            <div class="spinner-small" *ngIf="isSubmitting"></div>
+            {{ isSubmitting ? ('edit.updating' | translate) : ('edit.update' | translate) }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+</div>
